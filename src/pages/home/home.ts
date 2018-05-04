@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { DataProvider } from '../../providers/data/data';
 
 @Component({
   selector: 'page-home',
@@ -8,8 +9,16 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
   Name: string;
+  Weather: any = [];
 
-  constructor(private storage:Storage, public navCtrl: NavController) {
+  constructor(private data: DataProvider, private storage:Storage, public navCtrl: NavController) {
+  }
+
+  ionViewDidLoad()
+  {
+    this.data.GetWeatherData().subscribe(data=>{
+      this.Weather = data.weather;
+    })
   }
 
   update()
@@ -22,4 +31,6 @@ export class HomePage {
     this.storage.get("Name").then((data)=>{this.Name = data; })
     .catch((err) => { console.log("database retrieval err")})
   }
+
+
 }

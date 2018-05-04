@@ -11,6 +11,14 @@
   <ion-title >Hello {{ Name }}!</ion-title>
 
   <button ion-button (click)="update()">Click here to enter you name!</button>
-  
-  <img height="350" width="300" src = "../../assets/imgs/wave.gif">
+  <br>
+ 
+  <h1>The weather in Cavan today is:</h1>
+<ion-list>
+  <ion-item *ngFor = "let w of Weather">
+ <h2>{{w.main}}</h2>
+<h3>{{w.description}}</h3>
+  </ion-item>
+</ion-list>
+ 
 </ion-content>
